@@ -1,0 +1,39 @@
+---
+
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+
+    - name: install packages
+      apt:
+        name: "{{ item }}"
+      loop: "{{ packages }}"
+
+    - name: clone git repos for zsh
+      ansible.builtin.git:
+        repo: "{{ item }}"
+        dest: "/usr/share/{{ item | basename | replace('.git', '') }}"
+      loop:
+        - https://github.com/zsh-users/zsh-history-substring-search.git
+        - https://github.com/zsh-users/zsh-syntax-highlighting.git
+        - https://github.com/zsh-users/zsh-autosuggestions.git
+        - https://github.com/zsh-users/zsh-completions.git
+        - https://github.com/olivierverdier/zsh-git-prompt.git
+    
+    - name: add users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        shell: /bin/zsh
+      loop: "{{ users }}"
+
+    - name: copy zshrc for root
+      ansible.builtin.copy:
+        src: zshrc
+        dest: /root/.zshrc
+
+    - name: copy zshrc for users
+      ansible.builtin.copy:
+        src: zshrc
+        dest: "/home/{{ item }}/.zshrc"
+      loop: "{{ users }}"

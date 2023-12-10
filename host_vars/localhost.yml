@@ -1,0 +1,16 @@
+---
+packages:
+  - fwknop-server
+  - neovim
+  - molly-guard
+  - htop
+  - git
+  - zsh
+  - zsh-common
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - fonts-firacode
+
+users:
+  - dweise
+  - dw
