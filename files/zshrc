@@ -26,7 +26,7 @@ fi
 
 if [ -f /usr/share/zsh-git-prompt/zsh-git-prompt.zsh ]
 then
-	. /usr/share/zsh-git-prompt/zsh-git-prompt.zsh 
+	. /usr/share/zsh-git-prompt/zshrc.sh 
 fi
 
 # Set options
