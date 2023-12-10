@@ -24,7 +24,7 @@ then
 	. /usr/share/zsh-completions/zsh-completions.zsh 
 fi
 
-if [ -f /usr/share/zsh-git-prompt/zsh-git-prompt.zsh ]
+if [ -f /usr/share/zsh-git-prompt/zshrc.sh ]
 then
 	. /usr/share/zsh-git-prompt/zshrc.sh 
 fi
