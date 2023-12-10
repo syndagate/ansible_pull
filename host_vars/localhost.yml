@@ -7,8 +7,6 @@ packages:
   - git
   - zsh
   - zsh-common
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting
   - fonts-firacode
 
 users:
