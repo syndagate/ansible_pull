@@ -26,7 +26,8 @@ fi
 
 if [ -f /usr/share/zsh-git-prompt/zshrc.sh ]
 then
-	. /usr/share/zsh-git-prompt/zshrc.sh 
+	. /usr/share/zsh-git-prompt/zshrc.sh
+	GIT_PROMPT_EXECUTABLE="python3"
 fi
 
 # Set options
