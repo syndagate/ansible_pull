@@ -1,14 +1,9 @@
 ---
 packages:
-  - fwknop-server
-  - neovim
-  - molly-guard
-  - htop
   - git
   - zsh
   - zsh-common
   - fonts-firacode
 
 users:
-  - dweise
   - dw
