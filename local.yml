@@ -82,13 +82,13 @@
 
     - name: Ensure qterminal color-schemes dir exists
       ansible.builtin.file:
-        path: "/usr/share/termwidget5/color-schemes"
+        path: "/usr/share/qtermwidget5/color-schemes"
         state: directory
         mode: "0755"
     
     - name: Copy colorscheme
       ansible.builtin.copy:
         src: kd.colorscheme
-        dest: "/usr/share/termwidget5/color-schemes/kd.colorscheme"
+        dest: "/usr/share/qtermwidget5/color-schemes/kd.colorscheme"
         owner: root
         group: root
