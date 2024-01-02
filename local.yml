@@ -64,8 +64,8 @@
       ansible.builtin.copy:
         src: qterminal.ini
         dest: "/root/.config/qterminal.org/qterminal.ini"
-        owner: "{{ item }}"
-        group: "{{ item }}"
+        owner: root
+        group: root
     
     - name: Copy qterminal config
       ansible.builtin.copy:
