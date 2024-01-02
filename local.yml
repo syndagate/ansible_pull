@@ -80,6 +80,12 @@
         name: x-terminal-emulator
         path: /usr/bin/qterminal
 
+    - name: Ensure qterminal color-schemes dir exists
+      ansible.builtin.file:
+        path: "/usr/share/termwidget5/color-schemes"
+        state: directory
+        mode: "0755"
+    
     - name: Copy colorscheme
       ansible.builtin.copy:
         src: kd.colorscheme
