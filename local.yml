@@ -1,16 +1,17 @@
 ---
 
 - hosts: localhost
+  name: Install zsh and qterminal
   connection: local
   become: true
   tasks:
 
-    - name: install packages
+    - name: Install packages
       apt:
         name: "{{ item }}"
       loop: "{{ packages }}"
 
-    - name: clone git repos for zsh
+    - name: Clone git repos for zsh
       ansible.builtin.git:
         repo: "{{ item }}"
         dest: "/usr/share/{{ item | basename | replace('.git', '') }}"
@@ -21,18 +22,18 @@
         - https://github.com/zsh-users/zsh-completions.git
         - https://github.com/olivierverdier/zsh-git-prompt.git
     
-    - name: add users
+    - name: Add users
       ansible.builtin.user:
         name: "{{ item }}"
         shell: /bin/zsh
       loop: "{{ users }}"
 
-    - name: copy zshrc for root
+    - name: Copy zshrc for root
       ansible.builtin.copy:
         src: zshrc
         dest: /root/.zshrc
 
-    - name: copy zshrc for users
+    - name: Copy zshrc for users
       ansible.builtin.copy:
         src: zshrc
         dest: "/home/{{ item }}/.zshrc"
@@ -45,3 +46,43 @@
         owner: root
         group: root
         state: link
+
+    - name: Ensure qterminal config dir exists for root
+      ansible.builtin.file:
+        path: "/root/.config/qterminal.org"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure qterminal config dir exists users
+      ansible.builtin.file:
+        path: "/home/{{ item }}/.config/qterminal.org"
+        state: directory
+        mode: "0755"
+      loop: "{{ users }}"
+
+    - name: Copy qterminal config for root
+      ansible.builtin.copy:
+        src: qterminal.ini
+        dest: "/root/.config/qterminal.org/qterminal.ini"
+        owner: "{{ item }}"
+        group: "{{ item }}"
+    
+    - name: Copy qterminal config
+      ansible.builtin.copy:
+        src: qterminal.ini
+        dest: "/home/{{ item }}/.config/qterminal.org/qterminal.ini"
+        owner: "{{ item }}"
+        group: "{{ item }}"
+      loop: "{{ users }}"
+
+    - name: Update alternatives for qterminal
+      alternatives:
+        name: x-terminal-emulator
+        path: /usr/bin/qterminal
+
+    - name: Copy colorscheme
+      ansible.builtin.copy:
+        src: kd.colorscheme
+        dest: "/usr/share/termwidget5/color-schemes/kd.colorscheme"
+        owner: root
+        group: root
