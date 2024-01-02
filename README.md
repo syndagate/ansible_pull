@@ -18,3 +18,7 @@ This installs the terminal emulator 'qterminal' with matching color scheme. In a
 * https://github.com/olivierverdier/zsh-git-prompt.git
 
 Feel free to fork this repo and adjust it to your needs. Above all, the users in the 'host_vars/localhost.yml' file should be adapted to your needs.
+## Screenshots
+![](example01.png?raw=true)  
+
+![](example02.png?raw=true)
